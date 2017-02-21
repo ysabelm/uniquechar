@@ -1,16 +1,15 @@
 package com.simplon.lifelibrary;
 
 
-public class Dvd extends item {
-    private String title;
-    private Kind kind;
-    private int time;
+import java.util.Objects;
+
+public class Dvd extends Cd{
+    private Movie kind;
     private boolean threeD;
 
-    public Dvd(String title, Kind kind, int time, boolean threeD){
-        this.title = title;
+    public Dvd(String title, Movie kind, int time, boolean threeD){
+        super(title, time);
         this.kind = kind;
-        this.time = time;
         this.threeD = threeD;
     }
 
@@ -18,13 +17,14 @@ public class Dvd extends item {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if(!super.equals(o)) return false;
         Dvd dvd = (Dvd) o;
-        if (threeD != dvd.threeD) return false;
-        if (time != dvd.time) return false;
-        if (!title.equals(dvd.title)) return false;
-        return kind == dvd.kind;
-        }
-
+        return kind == dvd.kind && threeD == dvd.threeD;
+    }
+    @Override
+    public int hashCode(){
+        return Objects.hash(super.hashCode(), kind, threeD);
+    }
     @Override
     public String toString() {
         return "Dvd{" +

@@ -6,60 +6,101 @@ import java.util.ArrayList;
 import static junit.framework.Assert.assertEquals;
 
 
+
 public class LibraryTest {
 
     @Test
-    public void isOpen() {
-    Library library = new Library();
-    boolean result = library.isOpen(17);
-    assertEquals(true, result);
-    }
-    @Test
-    public void putBooks() {
+    public void putBooks_with_two_books(){
+        //Set
         Library library = new Library();
         Book book1 = new Book("Le rouge et le noir", 950);
         Book book2 = new Book("Accident nocturne", 110);
-        Book book3 = new Book("Nous étions les Mulvaney", 730);
-        ArrayList<Book> newBooks = new ArrayList<Book>();
-        newBooks.add(book1);
-        newBooks.add(book2);
-        newBooks.add(book3);
-
-        ArrayList<Book> output = library.putBooks(newBooks, 14);
-        assertEquals(newBooks, output);
+        ArrayList<Book> books = new ArrayList<Book>();
+        books.add(book1);
+        books.add(book2);
+        //Test
+        ArrayList<Book> output = library.putBooks(books);
+        //Assert
+        assertEquals(2, output.size());
     }
-    @Test
-    public void putCds() {
+    public void putCds_with_two_cds(){
+        //Set
         Library library = new Library();
         Cd cd1 = new Cd("Scary monsters", 110);
         Cd cd2 = new Cd("Serious moonlight", 95);
-        ArrayList<Cd> newCds = new ArrayList<Cd>();
-        newCds.add(cd1);
-        newCds.add(cd2);
-        ArrayList<Cd> output = library.putCds(newCds, 14);
-        assertEquals(newCds, output);
+        ArrayList<Cd> cds = new ArrayList<Cd>();
+        cds.add(cd1);
+        cds.add(cd2);
+        //Test
+        ArrayList<Cd> output = library.putCds(cds);
+        //Assert
+        assertEquals(2, output.size());
+    }
+    public void putDvds_with_four_dvds(){
+        //Set
+        Library library = new Library();
+        Dvd dvd1 = new Dvd("Sur quel pied danser", Movie.MUSICAL, 95,false);
+        Dvd dvd2 = new Dvd("L'arme fatale", Movie.ACTION, 100, true);
+        Dvd dvd3 = new Dvd("L'exorciste", Movie.HORROR, 90, false);
+        Dvd dvd4 = new Dvd("Quand Harry rencontre Sally", Movie.FUN, 125, false);
+        ArrayList<Dvd> dvds = new ArrayList<Dvd>();
+        dvds.add(dvd1);
+        dvds.add(dvd2);
+        dvds.add(dvd3);
+        dvds.add(dvd4);
+        //Test
+        ArrayList<Dvd> output = library.putDvds(dvds);
+        //Assert
+        assertEquals(0, output.size());
     }
     @Test
-    public void putDvds() {
+    public void putDvds_with_one_present_in_library_and_one_duplicated_input(){
+        //Set
         Library library = new Library();
-        Dvd dvd1 = new Dvd("Sur quel pied danser", Kind.MUSICAL, 95,false);
-        Dvd dvd2 = new Dvd("L'arme fatale", Kind.ACTION, 100, true);
-        Dvd dvd3 = new Dvd("L'exorciste", Kind.HORROR, 90, false);
-        Dvd dvd4 = new Dvd("Quand Harry rencontre Sally", Kind.FUN, 125, false);
+        Dvd dvd1 = new Dvd("Sur quel pied danser", Movie.MUSICAL, 95,false);
+        ArrayList<Dvd> dvds = new ArrayList<Dvd>();
+        dvds.add(dvd1);
+        library.putDvds(dvds);
 
+        Dvd dvd2 = new Dvd("L'arme fatale", Movie.ACTION, 100, true);
         ArrayList<Dvd> newDvds = new ArrayList<Dvd>();
-        newDvds.add(dvd1);
         newDvds.add(dvd2);
-        newDvds.add(dvd3);
-        newDvds.add(dvd4);
+        newDvds.add(dvd1);
+        //test
+        ArrayList<Dvd> output = library.putDvds(newDvds);
+        //Assert
+        assertEquals(1, output.size());
+        Dvd dvdActual = output.get(0);
+        assertEquals("dvd1", dvdActual.getTitle());
+    }
+    @Test
+    public void putDvds_with_two_duplicated_inputs(){
+        //Set
+        Library library = new Library();
+        Dvd dvd1 = new Dvd("Sur quel pied danser", Movie.MUSICAL, 95,false);
+        Dvd dvd2 = new Dvd("Sur quel pied danser", Movie.MUSICAL, 95,false);
+        ArrayList<Dvd> dvds = new ArrayList<Dvd>();
+        dvds.add(dvd1);
+        dvds.add(dvd2);
+        //Test
+        ArrayList<Dvd> output = library.putDvds(dvds);
+        //Assert
+        assertEquals(0, output.size());
+    }
 
-        ArrayList<Dvd> expectedDvds = new ArrayList<Dvd>();
-        expectedDvds.add(dvd1);
-        expectedDvds.add(dvd2);
-        expectedDvds.add(dvd3);
-        ArrayList<Dvd> result = library.putDvds(newDvds,17);
-        assertEquals(expectedDvds,result);
-        }
+
+    @Test
+    public void isOpen_at_three() {
+    Library library = new Library();
+    boolean output = library.isOpen(3);
+    assertEquals(true, result);
+    }
+    @Test
+    public void isOpen_at_ten() {
+        Library library = new Library();
+        boolean output = library.isOpen(10);
+        assertEquals(false, result);
+    }
 
 
 }

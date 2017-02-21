@@ -1,7 +1,7 @@
 package com.simplon.lifelibrary;
 
 
-public class Book extends item {
+public class Book {
     private String title;
     private int numPages;
 
