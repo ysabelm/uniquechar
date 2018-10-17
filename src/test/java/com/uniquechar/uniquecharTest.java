@@ -4,10 +4,6 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
 
-
-/**
- * Unit test for simple App.
- */
 public class uniquecharTest {
 
     @Test
@@ -16,7 +12,4 @@ public class uniquecharTest {
         boolean output = uniquechar.uniqueChar(str);
         assertEquals(true, output);
     }
-
-
-
 }
